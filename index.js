@@ -1,5 +1,4 @@
 const fs = require( 'fs' );
-const pdf = require( 'html-pdf' );
 
 const El = require( './src/el' );
 const OpenAPI = require( './src/openapi' );
@@ -133,13 +132,6 @@ class Main {
 		} );
 
 		this.template = this.template.replace( '%ROOT%', bodyHtml );
-
-		/*pdf.create( this.template ).toFile( './api-docs.pdf', ( err, res ) => {
-			if( err )
-				console.error( err );
-			else
-				console.log( 'Exported to ' + res.filename );
-		} );*/
 
 		console.log( this.template );
 
