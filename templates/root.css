@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600&display=swap');;
+
+* {
+	box-sizing: border-box;
+}
+
+html, body {
+	height: 100%;
+}
+
+body {
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	font-family: 'Source Sans Pro', sans-serif;
+}
+
+.paths {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	width: 100%;
+}
+
+.path {
+	background-color: #fdfdfd;
+	border: medium solid #d0d0d0;
+	border-width: 1px;
+	border-radius: 5px;
+	margin: 10px 0px 10px 10px;
+	min-width: 31%;
+	height: 100%;
+	-webkit-box-shadow: 2px 2px 2px 0px rgba(208,208,208,1);
+	-moz-box-shadow: 2px 2px 2px 0px rgba(208,208,208,1);
+	box-shadow: 2px 2px 2px 0px rgba(208,208,208,1);
+}
+
+.path_title {
+	text-align: center;
+	font-weight: 600;
+	padding: 10px 10px 5px;
+}
+
+.operation {
+	background-color: #f8f8f8;
+	border-radius: 5px;
+	padding: 5px 5px 10px;
+	margin: 10px;
+}
+
+.operation_title {
+	text-align: center;
+	font-weight: 600;
+}
+
+.operation_subtitle {
+	text-align: center;
+	font-weight: 600;
+	padding: 15px 0;
+}
+
+.operation_parameter {
+	padding: 0 5px;
+}
+
+.type_get {
+	background-color: #bae1ff;
+}
+
+.type_post {
+	background-color: #baffc9;
+}
+
+.type_put {
+	background-color: #ffdfba;
+}
+
+.type_delete {
+	background-color: #ffb3ba;
+}
+
+.type_options {
+	background-color: #c9c9ff;
+}
+
+@media screen {
+
+	@page {
+		margin: 5cm;
+	}
+
+	.page {
+		width: 100px;
+	}
+}
