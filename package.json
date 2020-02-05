@@ -8,7 +8,5 @@
   },
   "author": "Toni Harju",
   "license": "MIT",
-  "dependencies": {
-    "html-pdf": "^2.2.0"
-  }
+  "dependencies": {}
 }
