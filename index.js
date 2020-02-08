@@ -71,22 +71,22 @@ class Main {
 								if( i < responses.length ) html += '<br />';
 								return acc + html;
 							}, '' );
-							const responseComponentsHtml = responses.reduce( ( a, response ) => {
-								return a + response.mediaTypes.reduce( ( b, mediaType, i ) => {
+							const responseComponentsHtml = responses.reduce( ( a, response, i ) => {
+								return a + response.mediaTypes.reduce( ( b, mediaType, j ) => {
 									let html = b;
 									if( !isEmpty( mediaType.schema ) && !isEmpty( mediaType.schema.componentRef ) ) {
 										html += `${ response.code }: ${ mediaType.type }: ${ mediaType.schema.componentRef }`;
-										if( i < operation.mediaTypes.length ) html += '<br />';
+										if( j < operation.mediaTypes.length || i < responses.length ) html += '<br />';
 									}
 									return html;
 								}, '' );
 							}, '' );
-							const responseDefinitionsHtml = responses.reduce( ( a, response ) => {
-								return a + response.mediaTypes.reduce( ( b, mediaType, i ) => {
+							const responseDefinitionsHtml = responses.reduce( ( a, response, i ) => {
+								return a + response.mediaTypes.reduce( ( b, mediaType, j ) => {
 									let html = b;
 									if( !isEmpty( mediaType.schema ) && !isEmpty( mediaType.schema.definitionRef ) ) {
 										html += `${ response.code }: ${ mediaType.type }: ${ mediaType.schema.definitionRef }`;
-										if( i < operation.mediaTypes.length ) html += '<br />';
+										if( j < operation.mediaTypes.length || i < responses.length ) html += '<br />';
 									}
 									return html;
 								}, '' );
@@ -136,7 +136,19 @@ class Main {
 			return pathHtml;
 		} );
 
-		this.template = this.template.replace( '%ROOT%', bodyHtml );
+		const api_title = this.data.info.title;
+		const api_version = this.data.info.version;
+		const api_description = this.data.info.description;
+
+		const headerHtml = `<header>` +
+			`<div class="header-top">` +
+				`<div class="api-title">${ api_title }</div>` +
+				`<div class="api-version">${ api_version }</div>` + 
+			`</div>` +
+			( !isEmpty( api_description ) ? `<div class="api-description">${ api_description }</div>` : '' ) +
+		`</header>`;
+
+		this.template = this.template.replace( '%ROOT%', headerHtml + bodyHtml );
 
 		console.log( this.template );
 

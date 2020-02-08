@@ -23,6 +23,39 @@ body {
 	font-family: 'Source Sans Pro', sans-serif;
 }
 
+header {
+
+	background-color: #f8f8f8;
+	padding: 10px;
+
+	& > .header-top {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+
+		& > .api-title {
+			font-weight: 600;
+			font-size: 25px;
+			padding-right: 10px;
+		}
+
+		& > .api-version {
+			text-align: center;
+			background-color: silver;
+			border-radius: 10px;
+			font-weight: 600;
+			font-size: 12px;
+			width: 50px;
+			padding: 2px;
+			color: white;
+		}
+	}
+
+	& > .api-description {
+		font-style: italic;
+	}
+}
+
 .paths {
 	display: flex;
 	flex-wrap: wrap;
@@ -151,13 +184,20 @@ body {
 	}
 }
 
-@media screen {
-
-	@page {
-		margin: 5cm;
+@media only screen and (max-width: 1280px) {
+	.path {
+		width: 45%;
 	}
+}
 
-	.page {
-		width: 100px;
+@media only screen and (max-width: 1000px) {
+	.path_title {
+		font-size: 15px;
+	}
+}
+
+@media only screen and (max-width: 733px) {
+	.path {
+		width: 90%;
 	}
 }
