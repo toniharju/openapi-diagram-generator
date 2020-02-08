@@ -1,6 +1,6 @@
 const { isEmpty, getOrDefault } = require( './utils' );
 
-class OpenAPI {
+class OpenAPI3 {
 
 	constructor( data ) {
 		this.generate( data );
@@ -105,4 +105,4 @@ class OpenAPI {
 
 }
 
-module.exports = OpenAPI;
+module.exports = OpenAPI3;

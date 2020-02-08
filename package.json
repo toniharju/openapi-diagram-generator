@@ -8,5 +8,7 @@
   },
   "author": "Toni Harju",
   "license": "MIT",
-  "dependencies": {}
+  "dependencies": {
+    "node-sass": "^4.13.1"
+  }
 }

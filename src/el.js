@@ -28,6 +28,13 @@ class El {
 		return `<div class="operation_parameter">${ parameter }</div>`;
 	};
 
+	static operationParameters( subtitle, parameters ) {
+		return `<div class="operation_parameters">` + 
+					`<div class="operation_subtitle">${ subtitle }</div>` +
+					`<div class="operation_parameter">${ parameters }</div>` +
+				`</div>`;
+	}
+
 }
 
 module.exports = El;

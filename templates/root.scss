@@ -1,0 +1,163 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600&display=swap');;
+
+$get-color:		#58a8b4;
+$post-color:	#86ba68;
+$put-color:		#e2c341;
+$delete-color:	#df705c;
+$options-color:	#c9c9ff;
+
+$operation-text-color: #ffffff;
+
+* {
+	box-sizing: border-box;
+}
+
+html, body {
+	height: 100%;
+}
+
+body {
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	font-family: 'Source Sans Pro', sans-serif;
+}
+
+.paths {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	width: 100%;
+}
+
+.path {
+	background-color: #fdfdfd;
+	border: medium solid #d0d0d0;
+	border-width: 1px;
+	margin: 10px 0px 10px 10px;
+	min-width: 31%;
+	height: 100%;
+	-webkit-box-shadow: 2px 2px 2px 0px rgba(208,208,208,1);
+	-moz-box-shadow: 2px 2px 2px 0px rgba(208,208,208,1);
+	box-shadow: 2px 2px 2px 0px rgba(208,208,208,1);
+}
+
+.path_title {
+	text-align: center;
+	font-size: 20px;
+	font-weight: 600;
+	padding: 10px;
+}
+
+.operation {
+	background-color: #f8f8f8;
+	color: $operation-text-color;
+	margin-bottom: 0;
+
+	&:last-child {
+		margin-bottom: 0;
+	}
+}
+
+.operation_title {
+	text-align: center;
+	font-size: 20px;
+	font-weight: 600;
+	padding: 5px 10px;
+}
+
+.operation_subtitle {
+	font-weight: 600;
+	padding-left: -10px;
+	padding-bottom: 10px;
+}
+
+.operation_parameters {
+	padding: 10px;
+}
+
+.operation_parameter {
+	padding: 0 10px;
+}
+
+.type_get {
+
+	& > .operation_title {
+		background-color: darken($get-color, 5%);
+	}
+
+	& > .operation_parameters:nth-child(odd) {
+		background-color: darken($get-color, 5%);
+	}
+
+	& > .operation_parameters:nth-child(even) {
+		background-color: $get-color;
+	}
+
+}
+
+.type_post {
+
+	& > .operation_title {
+		background-color: darken($post-color, 5%);
+	}
+
+	& > .operation_parameters:nth-child(odd) {
+		background-color: darken($post-color, 5%);
+	}
+
+	& > .operation_parameters:nth-child(even) {
+		background-color: $post-color;
+	}
+}
+
+.type_put {
+	background-color: $put-color;
+
+	& > .operation_title {
+		background-color: lighten($put-color, 5%);
+	}
+
+	& > .operation_parameters:nth-child(odd) {
+		background-color: $put-color;
+	}
+
+	& > .operation_parameters:nth-child(even) {
+		background-color: lighten($put-color, 5%);
+	}
+}
+
+.type_delete {
+	background-color: darken($delete-color, 5%);
+	
+	& > .operation_title {
+		background-color: $delete-color;
+	}
+
+	& > .operation_parameters:nth-child(odd) {
+		background-color: darken($delete-color, 5%);
+	}
+
+	& > .operation_parameters:nth-child(even) {
+		background-color: $delete-color;
+	}
+}
+
+.type_options {
+	background-color: $options-color;
+
+	& > .operation_title {
+		background-color: darken($options-color, 5%);
+	}
+}
+
+@media screen {
+
+	@page {
+		margin: 5cm;
+	}
+
+	.page {
+		width: 100px;
+	}
+}

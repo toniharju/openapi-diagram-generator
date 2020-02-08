@@ -1,7 +1,8 @@
 const fs = require( 'fs' );
+const sass = require( 'node-sass' );
 
 const El = require( './src/el' );
-const OpenAPI = require( './src/openapi' );
+const OpenAPI3 = require( './src/openapi3' );
 const { isEmpty } = require( './src/utils' );
 
 class Main {
@@ -11,7 +12,8 @@ class Main {
 		const jsonData = fs.readFileSync( source, 'utf8' );
 		this.data = JSON.parse( jsonData );
 
-		const style = fs.readFileSync( './templates/root.css', 'utf8' );
+		let style = fs.readFileSync( './templates/root.scss', 'utf8' );
+		style = sass.renderSync( { data: style } ).css.toString( 'utf8' );
 		this.template = fs.readFileSync( './templates/root.html', 'utf8' );
 		this.template = this.template.replace( '%TITLE%', this.data[ 'info' ][ 'title' ] );
 		this.template = this.template.replace( '%STYLE%', style );
@@ -23,9 +25,12 @@ class Main {
 	render() {
 
 		let bodyHtml = '';
-
-		const openApi = new OpenAPI( this.data );
-
+		let openApi = null;
+		if( this.data.openapi.substr( 0, 1 ) === '3' )
+			openApi = new OpenAPI3( this.data );
+		else
+			throw 'Only OpenAPI 3 is supported';
+		
 		bodyHtml += El.paths( () => {
 			let pathHtml = '';
 			for( const path of openApi.paths ) {
@@ -107,20 +112,20 @@ class Main {
 
 							return (
 								El.operationTitle( operation.operationType.toUpperCase() ) +
-								( !isEmpty( urlParameterHtml ) ? El.operationSubtitle( 'url parameters' ) : '' ) + 
-								( !isEmpty( urlParameterHtml ) ? El.operationParameter( urlParameterHtml ) : '' ) + 
-								( !isEmpty( queryParameterHtml ) ? El.operationSubtitle( 'query parameters' ) : '' ) +
-								( !isEmpty( queryParameterHtml ) ? El.operationParameter( queryParameterHtml ) : '' ) +
-								( !isEmpty( requestComponentsHtml ) ? El.operationSubtitle( 'request component refs' ) : '' ) +
-								( !isEmpty( requestComponentsHtml ) ? El.operationParameter( requestComponentsHtml ) : '' ) +
-								( !isEmpty( requestDefinitionsHtml ) ? El.operationSubtitle( 'request definition refs' ) : '' ) +
-								( !isEmpty( requestDefinitionsHtml ) ? El.operationParameter( requestDefinitionsHtml ) : '' ) +
-								( !isEmpty( responseCodesHtml ) ? El.operationSubtitle( 'response codes' ) : '' ) + 
-								( !isEmpty( responseCodesHtml ) ? El.operationParameter( responseCodesHtml ) : '' ) + 
-								( !isEmpty( responseComponentsHtml ) ? El.operationSubtitle( 'response component refs' ) : '' ) +
-								( !isEmpty( responseComponentsHtml ) ? El.operationParameter( responseComponentsHtml ) : '' ) +
-								( !isEmpty( responseDefinitionsHtml ) ? El.operationSubtitle( 'response definition refs' ) : '' ) +
-								( !isEmpty( responseDefinitionsHtml ) ? El.operationParameter( responseDefinitionsHtml ) : '' )
+								( !isEmpty( urlParameterHtml ) ? 
+									El.operationParameters( 'url parameters', urlParameterHtml ) : '' ) + 
+								( !isEmpty( queryParameterHtml ) ? 
+									El.operationParameters( 'query parameters', queryParameterHtml ) : '' ) +
+								( !isEmpty( requestComponentsHtml ) ? 
+									El.operationParameters( 'request component refs', requestComponentsHtml ) : '' ) +
+								( !isEmpty( requestDefinitionsHtml ) ? 
+									El.operationParameters( 'request definition refs', requestDefinitionsHtml ) : '' ) +
+								( !isEmpty( responseCodesHtml ) ? 
+									El.operationParameters( 'response codes', responseCodesHtml ) : '' ) + 
+								( !isEmpty( responseComponentsHtml ) ? 
+									El.operationParameters( 'response component refs', responseComponentsHtml ) : '' ) +
+								( !isEmpty( responseDefinitionsHtml ) ? 
+									El.operationParameters( 'response definition refs', responseDefinitionsHtml ) : '' )
 							);
 
 						} );
