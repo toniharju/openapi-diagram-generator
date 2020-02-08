@@ -87,11 +87,14 @@ class OpenAPI3 {
 				return schema;
 			}
 		} else {
-			return null;
+			return {};
 		}
 	}
 
 	populateMediaTypes( content ) {
+		if( isEmpty( content ) )
+			return [];
+
 		const returnableMediaTypes = [];
 		for( const [ mediaType, data ] of Object.entries( content ) ) {
 			const type = { type: mediaType };

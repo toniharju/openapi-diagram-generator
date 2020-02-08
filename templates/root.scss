@@ -131,7 +131,7 @@ body {
 	background-color: darken($delete-color, 5%);
 	
 	& > .operation_title {
-		background-color: $delete-color;
+		background-color: darken($delete-color, 5%);
 	}
 
 	& > .operation_parameters:nth-child(odd) {
